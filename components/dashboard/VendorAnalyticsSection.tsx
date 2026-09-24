@@ -31,15 +31,33 @@ const VendorAnalyticsChart = dynamic(
   }
 );
 
+/**
+ * Formats a numeric rate into a percentage string with one decimal place.
+ * @param value - The numeric value to format.
+ * @returns A formatted string (e.g., "95.0%").
+ */
 function formatRate(value: number): string {
   return `${value.toFixed(1)}%`;
 }
 
+/**
+ * Normalizes a given rate to a percentage value between 0 and 100.
+ * Useful when the backend might return either a decimal fraction (0.9) or a percentage (90).
+ * @param value - The rate value to normalize.
+ * @returns The normalized percentage value.
+ */
 function normalizeRate(value: number | undefined): number {
   if (typeof value !== "number" || Number.isNaN(value)) return 0;
   return value <= 1 ? value * 100 : value;
 }
 
+/**
+ * Extracts and calculates summary metrics from a VendorAnalyticsResponse and its data points.
+ * Falls back to computing averages or sums from the provided data points if the top-level metrics are missing.
+ * @param source - The full analytics response object, or null if unavailable.
+ * @param points - The array of data points to use for fallback calculations.
+ * @returns An object containing the calculated top-level metrics.
+ */
 function pickMetrics(source: VendorAnalyticsResponse | null, points: VendorAnalyticsPoint[]) {
   const latestPoint = points.at(-1);
   const pointAverage = points.length > 0
@@ -55,19 +73,32 @@ function pickMetrics(source: VendorAnalyticsResponse | null, points: VendorAnaly
   };
 }
 
+/**
+ * Properties for the MetricCard component.
+ */
+interface MetricCardProps {
+  /** The primary label describing the metric. */
+  label: string;
+  /** The formatted value of the metric to display. */
+  value: string;
+  /** Additional context or secondary text below the value. */
+  hint: string;
+  /** An icon component to visually represent the metric. */
+  icon: ReactNode;
+  /** CSS class names defining the color and background of the icon container. */
+  tone: string;
+}
+
+/**
+ * A card component that displays a single metric with a label, value, hint, and icon.
+ */
 function MetricCard({
   label,
   value,
   hint,
   icon,
   tone,
-}: {
-  label: string;
-  value: string;
-  hint: string;
-  icon: ReactNode;
-  tone: string;
-}) {
+}: MetricCardProps) {
   return (
     <div className="rounded-3xl border border-zinc-200/80 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
       <div className="flex items-start justify-between gap-4">
@@ -84,6 +115,10 @@ function MetricCard({
   );
 }
 
+/**
+ * Renders the vendor analytics dashboard section.
+ * Displays top-level metrics and a trend chart, managing its own data fetching and error states.
+ */
 export default function VendorAnalyticsSection() {
   const { t } = useTranslation();
   const router = useRouter();
