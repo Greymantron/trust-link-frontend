@@ -8,9 +8,9 @@ import { useTranslation } from "react-i18next";
 
 import { getVendorAnalytics, type VendorAnalyticsPoint, type VendorAnalyticsResponse } from "@/lib/api";
 
-import VendorAnalyticsSkeleton from "./VendorAnalyticsSkeleton";
 import { VendorAnalyticsHeader } from "./VendorAnalyticsHeader";
 import { VendorAnalyticsMetricsGrid } from "./VendorAnalyticsMetricsGrid";
+import VendorAnalyticsSkeleton from "./VendorAnalyticsSkeleton";
 import { VendorAnalyticsTrendSection } from "./VendorAnalyticsTrendSection";
 
 /**

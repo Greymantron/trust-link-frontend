@@ -1,7 +1,9 @@
 import { BarChart3, ShieldAlert, ShoppingBag, TrendingUp } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import { MetricCard } from "./VendorAnalyticsMetricCard";
+
 import { formatUSDC } from "@/utils/currency";
+
+import { MetricCard } from "./VendorAnalyticsMetricCard";
 
 /**
  * Calculated metrics for the vendor analytics section.

@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { ArrowLeft, BarChart3, Clock3 } from "lucide-react";
+import Link from "next/link";
 import { useTranslation } from "react-i18next";
 
 /**

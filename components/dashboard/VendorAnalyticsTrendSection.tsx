@@ -1,5 +1,6 @@
-import { useTranslation } from "react-i18next";
 import dynamic from "next/dynamic";
+import { useTranslation } from "react-i18next";
+
 import { type VendorAnalyticsPoint } from "@/lib/api";
 
 const VendorAnalyticsChart = dynamic(

@@ -1,8 +1,7 @@
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { useRouter } from "next/navigation";
-import React from "react";
 import { useTranslation } from "react-i18next";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, type Mock,vi } from "vitest";
 
 import { getVendorAnalytics, type VendorAnalyticsResponse } from "@/lib/api";
 
@@ -72,16 +71,16 @@ function mockMatchMedia(initialMatches: boolean) {
 }
 
 describe("VendorAnalyticsSection", () => {
-  let mockRouterPush: ReturnType<typeof vi.fn>;
+  let mockRouterPush: Mock;
 
   beforeEach(() => {
     mockMatchMedia(false);
     window.localStorage.clear();
     mockUseTranslation.mockReturnValue({
       t: (key: string) => key,
-    } as any);
+    } as unknown as ReturnType<typeof useTranslation>);
     mockRouterPush = vi.fn();
-    mockUseRouter.mockReturnValue({ push: mockRouterPush } as any);
+    mockUseRouter.mockReturnValue({ push: mockRouterPush } as unknown as ReturnType<typeof useRouter>);
     
     // Mock window.location.reload
     Object.defineProperty(window, "location", {
