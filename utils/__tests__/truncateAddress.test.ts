@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { truncateAddress } from "../truncateAddress";
 
 describe("truncateAddress", () => {
@@ -17,7 +18,7 @@ describe("truncateAddress", () => {
   });
 
   it("handles undefined inputs gracefully", () => {
-    expect(truncateAddress(undefined as any)).toBe("");
+    expect(truncateAddress(undefined as unknown as string)).toBe("");
   });
 
   it("truncates with custom startChars and endChars", () => {

@@ -109,7 +109,7 @@ describe("downloadCsv", () => {
   });
 
   it("handles missing column keys gracefully", () => {
-    const rows: any[] = [{ id: "1" }]; // missing 'missingKey'
+    const rows: Record<string, unknown>[] = [{ id: "1" }]; // missing 'missingKey'
     const columns = [
       { key: "id", header: "ID" },
       { key: "missingKey", header: "Missing Key" },
