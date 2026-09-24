@@ -202,6 +202,12 @@ export default function VendorAnalyticsSection() {
             <button
               type="button"
               onClick={() => window.location.reload()}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  window.location.reload();
+                }
+              }}
               className="mt-4 inline-flex items-center gap-2 rounded-full bg-rose-600 px-4 py-2 text-sm font-semibold text-white transition hover:bg-rose-700"
             >
               {t("dashboard.analyticsPage.retry")}
